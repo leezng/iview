@@ -1,5 +1,6 @@
 <template>
     <span :class="wrapClasses" @click="toggle">
+        <input type="hidden" :name="name" :value="currentValue">
         <span :class="innerClasses">
             <slot name="open" v-if="currentValue === trueValue"></slot>
             <slot name="close" v-if="currentValue === falseValue"></slot>
@@ -13,7 +14,7 @@
     const prefixCls = 'ivu-switch';
 
     export default {
-        name: 'Switch',
+        name: 'iSwitch',
         mixins: [ Emitter ],
         props: {
             value: {
@@ -36,6 +37,9 @@
                 validator (value) {
                     return oneOf(value, ['large', 'small', 'default']);
                 }
+            },
+            name: {
+                type: String
             }
         },
         data () {

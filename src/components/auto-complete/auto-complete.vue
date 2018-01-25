@@ -7,6 +7,7 @@
         :clearable="clearable"
         :placeholder="placeholder"
         :size="size"
+        :placement="placement"
         filterable
         remote
         auto-complete
@@ -15,9 +16,11 @@
         :transfer="transfer">
         <slot name="input">
             <i-input
+                :element-id="elementId"
                 ref="input"
                 slot="input"
                 v-model="currentValue"
+                :name="name"
                 :placeholder="placeholder"
                 :disabled="disabled"
                 :size="size"
@@ -78,9 +81,21 @@
                 type: [Function, Boolean],
                 default: false
             },
+            placement: {
+                validator (value) {
+                    return oneOf(value, ['top', 'bottom']);
+                },
+                default: 'bottom'
+            },
             transfer: {
                 type: Boolean,
                 default: false
+            },
+            name: {
+                type: String
+            },
+            elementId: {
+                type: String
             }
         },
         data () {
